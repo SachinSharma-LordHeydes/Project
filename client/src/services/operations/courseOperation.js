@@ -11,7 +11,7 @@ const {COURSE_CATEGORIES_API,CREATE_COURSE_API,DELETE_COURSE_API,COURSE_DETAILS_
 const {GET_CLICKED_CATEGORIES_API}=categories
 const {COURSE_INITILIZE_PAYMENT_API,COURSE_COMPLETE_PAYMENT_API}=studentEndpoints
 
-
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 
 export function getCatagory(){
@@ -286,7 +286,7 @@ export function buyCourse(itemId, totalPrice,user){
   return async(dispatch)=>{
     try {
       console.log("user to buy----------->",user)
-      const response = await axios.post('http://localhost:8080/api/v1/payment/initialize-esewa', {
+      const response = await axios.post(`${apiBaseUrl}`, {
         user,
         itemId,
         totalPrice: Number(totalPrice).toFixed(2), // Format price to 2 decimal places
@@ -303,13 +303,13 @@ export function buyCourse(itemId, totalPrice,user){
       // Step 2: Create eSewa form dynamically
       const paymentForm = {
         amount: Number(totalPrice).toFixed(2), // Ensure amount is also formatted
-        failure_url: `http://localhost:5173?payment=failed`,
+        failure_url: `${apiBaseUrl}`,
         product_delivery_charge: '0.00',
         product_service_charge: '0.00',
         product_code: 'EPAYTEST', // Use your eSewa product code
         signature: payment.signature,
         signed_field_names: payment.signed_field_names,
-        success_url: `http://localhost:8080/api/v1/payment/complete-payment`,
+        success_url: `${apiBaseUrl}`,
         tax_amount: '0.00',
         total_amount: Number(totalPrice).toFixed(2), // Ensure total amount is also formatted
         transaction_uuid: purchasedItemData._id,
