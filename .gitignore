@@ -1,5 +1,5 @@
 node_modules
 client/snyk.exe
 imp.txt
-.server/.env
-.client/.env
+server/.env
+client/.env
