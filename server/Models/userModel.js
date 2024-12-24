@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
   cart:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:'courseModel',
-    unique:true,
   }],
   courseProgress: [{
     type: mongoose.Schema.Types.ObjectId,
