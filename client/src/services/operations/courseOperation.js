@@ -286,7 +286,7 @@ export function buyCourse(itemId, totalPrice,user){
   return async(dispatch)=>{
     try {
       console.log("user to buy----------->",user)
-      const response = await axios.post(`${apiBaseUrl}/api/v1/payment/initialize-esewa`, {
+      const response = await axios.post("https://studynotion-eu3j.onrender.com/api/v1/payment/initialize-esewa", {
         user,
         itemId,
         totalPrice: Number(totalPrice).toFixed(2), // Format price to 2 decimal places
@@ -305,13 +305,13 @@ export function buyCourse(itemId, totalPrice,user){
       // Step 2: Create eSewa form dynamically
       const paymentForm = {
         amount: Number(totalPrice).toFixed(2),
-        failure_url: `${apiBaseUrl}/api/v1/payment/initialize-esewa`,
+        failure_url: `https://frontend-i79x.onrender.com`,
         product_delivery_charge: '0.00',
         product_service_charge: '0.00',
         product_code: 'EPAYTEST', 
         signature: payment.signature,
         signed_field_names: payment.signed_field_names,
-        success_url: `${apiBaseUrl}/api/v1/payment/initialize-esewa`,
+        success_url: "https://studynotion-eu3j.onrender.com/api/v1/payment/complete-payment",
         tax_amount: '0.00',
         total_amount: Number(totalPrice).toFixed(2), 
         transaction_uuid: purchasedItemData._id,
