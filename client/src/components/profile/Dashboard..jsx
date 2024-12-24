@@ -47,7 +47,7 @@ function Dashboard() {
                 <div>
                   <p className='text-richblack-300 mt-1'>
                     {
-                      userData&&userData?.about?userData.about:"Write Something About Yourself"
+                      profileInfo&&profileInfo?.about?profileInfo.about:"Write Something About Yourself"
                     }
                   </p>
                 </div>
@@ -88,7 +88,7 @@ function Dashboard() {
                     <div>
                       <div className='text-richblack-5 text-lg'>Date Of Birth</div>
                       <div className='text-richblack-500 text-md'>
-                        {userData&&userData.DOB ? userData.DOB : 'Add DOB'}
+                        {profileInfo&&profileInfo?.DOB ? profileInfo.DOB : 'Add DOB'}
                       </div>
                     </div>
                   </div>
