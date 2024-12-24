@@ -44,7 +44,7 @@ exports.signUpHandler=async(req,res)=>{
 
     console.log("Backenf OTP response => ",otpResponse);
     
-    if (otpResponse.length === 0 || otp !== otpResponse.otp) {
+    if (!otpResponse || otp !== otpResponse.otp) {
       return res.status(400).json({
         success: false,
         message: 'The OTP is not valid',
