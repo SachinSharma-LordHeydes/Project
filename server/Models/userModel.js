@@ -40,6 +40,7 @@ const userSchema = new mongoose.Schema({
   cart:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:'courseModel',
+    default: [],
   }],
   courseProgress: [{
     type: mongoose.Schema.Types.ObjectId,
