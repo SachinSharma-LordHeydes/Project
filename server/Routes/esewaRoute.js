@@ -99,7 +99,7 @@ router.get('/payment/complete-payment', async (req, res) => {
 
     console.log("enrolled studenr pushed------->",userResponse)
 
-    return res.redirect('http://localhost:5173?payment=success');
+    return res.redirect('https://frontend-i79x.onrender.com/dashboard/enrolled-courses');
   } catch (error) {
     console.error('Payment completion error:', error.message);
     return res.redirect(
