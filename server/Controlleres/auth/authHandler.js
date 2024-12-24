@@ -66,6 +66,7 @@ exports.signUpHandler = async (req, res) => {
     console.error("Signup Error:", error);
     return res.status(500).json({
       success: false,
+      error:errror.message,
       message: "Internal server error",
     });
   }
