@@ -10,83 +10,66 @@ require('dotenv').config();
 
 
 //SignUp
-exports.signUpHandler=async(req,res)=>{
+exports.signUpHandler = async (req, res) => {
   try {
-    console.log("req.body=>",req.body)
-    const {firstName,lastName,email,password,confirmPassword,accountType,otp}=req.body;
+    const { firstName, lastName, email, password, confirmPassword, accountType, otp } = req.body;
 
-
-    if(!firstName || !lastName || !email || !password || !confirmPassword || !accountType || !otp){
-      return res.status(500).json({
-        success:false,
-        message:"All fields are required",
-      })
-    }
-
-    if(confirmPassword!==password){
-      return res.status(500).json({
-        success:false,
-        message:"Password And ConfirmPassword Didn't Match"
-      })
-    }
-
-    const userExist= await userModel.findOne({email});
-
-    if(userExist){
-      return res.status(500).json({
-        success:false,
-        message:"User already Exists"
-      })
-    }
-
-    const otpResponse = await OTPModel.findOne({ email }).sort({ createdAt: -1 }).limit(1); 
-    //To get The Latest OTP present in OPTModel } {-1=>Decending} {limit(1)=>to get Only ONE putput/response} usong sort with limt can manage order and quantity
-
-    console.log("Backenf OTP response => ",otpResponse);
-    
-    if (!otpResponse || otp !== otpResponse.otp) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !accountType || !otp) {
       return res.status(400).json({
         success: false,
-        message: 'The OTP is not valid',
+        message: "All fields are required",
       });
     }
 
-    const encryptedPassword = await bcrypt.hash(password, saltRounds)
-    console.log(encryptedPassword);
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
+    }
 
-    const profileDetail=await profileModle.create({
-      gender:null,
-      DOB:null,
-      about:null,
-      contactNum:null
-    });
+    const userExist = await userModel.findOne({ email });
+    if (userExist) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists",
+      });
+    }
 
-    const userResponse=await userModel.create({
+    const otpResponse = await OTPModel.findOne({ email }).sort({ createdAt: -1 }).limit(1);
+    if (!otpResponse || otp !== otpResponse.otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid OTP",
+      });
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, saltRounds);
+    const profileDetail = await profileModle.create({ gender: null, DOB: null, about: null, contactNum: null });
+
+    const userResponse = await userModel.create({
       firstName,
       lastName,
       email,
-      password:encryptedPassword,
+      password: encryptedPassword,
       accountType,
-      addDetail:profileDetail._id,
-      image:`https://api.dicebear.com/9.x/initials/svg?seed=${firstName} ${lastName}`,
-      token:'',
+      addDetail: profileDetail._id,
+      image: `https://api.dicebear.com/9.x/initials/svg?seed=${firstName} ${lastName}`,
     });
 
-    return res.status(200).json({
-      success:true,
-      message:`User Entry Created Successfully`,
-      data:userResponse
-    })
-
+    return res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      data: userResponse,
+    });
   } catch (error) {
-    console.log(error);
+    console.error("Signup Error:", error);
     return res.status(500).json({
-      success:false,
-      message:error.message,
-      error:error
-    })
+      success: false,
+      message: "Internal server error",
+    });
   }
-}
+};
 
 
 
