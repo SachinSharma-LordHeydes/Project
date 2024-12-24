@@ -169,7 +169,7 @@ function Login() {
 
             <div className='flex justify-center'>
               <button className='mt-9 w-96 mx-auto text-black text-lg text-center bg-yellow-50 p-2 rounded-lg'>
-                Sing In
+                Sign In
               </button>
             </div>
           </form>
