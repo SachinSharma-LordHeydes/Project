@@ -286,7 +286,7 @@ export function buyCourse(itemId, totalPrice,user){
   return async(dispatch)=>{
     try {
       console.log("user to buy----------->",user)
-      const response = await axios.post(`${apiBaseUrl}`, {
+      const response = await axios.post(COURSE_INITILIZE_PAYMENT_API, {
         user,
         itemId,
         totalPrice: Number(totalPrice).toFixed(2), // Format price to 2 decimal places
