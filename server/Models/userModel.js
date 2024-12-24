@@ -37,11 +37,13 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  cart:[{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'courseModel',
-    default: [],
-  }],
+  cart: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'courseModel'
+    }],
+    default: []
+  },
   courseProgress: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "courseProgressModel",
