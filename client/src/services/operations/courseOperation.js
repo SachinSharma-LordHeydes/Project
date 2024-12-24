@@ -333,7 +333,7 @@ export function buyCourse(itemId, totalPrice,user){
       document.body.appendChild(form);
       form.submit();
     } catch (error) {
-      console,log("Error----------->",error)
+      console.log("Error----------->",error)
       console.error('Error during payment initiation:', error);
     }
   }
