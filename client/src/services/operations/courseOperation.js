@@ -286,18 +286,18 @@ export function buyCourse(itemId, totalPrice,user){
   return async(dispatch)=>{
     try {
       console.log("user to buy----------->",user)
-      const response = await axios.post(COURSE_INITILIZE_PAYMENT_API, {
+      const response = await axios.post(`${apiBaseUrl}/api/v1/payment/initialize-esewa`, {
         user,
         itemId,
         totalPrice: Number(totalPrice).toFixed(2), // Format price to 2 decimal places
       });
   
+      const { success, payment, purchasedItemData } = response.data;
   
       if (!success) {
         throw new Error('Failed to initialize payment. ', response);
       }
       
-      const { success, payment, purchasedItemData } = response.data;
   
       console.log('eSewa Payment Initialization:', payment);
   
