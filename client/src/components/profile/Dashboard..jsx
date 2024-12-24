@@ -47,7 +47,7 @@ function Dashboard() {
                 <div>
                   <p className='text-richblack-300 mt-1'>
                     {
-                      userData&&userData.description?userData.description:"Write Something About Yourself"
+                      userData&&userData?.about?userData.about:"Write Something About Yourself"
                     }
                   </p>
                 </div>
