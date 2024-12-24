@@ -295,6 +295,7 @@ export function buyCourse(itemId, totalPrice,user){
       const { success, payment, purchasedItemData } = response.data;
   
       if (!success) {
+        console.log('Error whiile making payment-----> ', response);
         throw new Error('Failed to initialize payment. ', response);
       }
       
