@@ -292,11 +292,12 @@ export function buyCourse(itemId, totalPrice,user){
         totalPrice: Number(totalPrice).toFixed(2), // Format price to 2 decimal places
       });
   
-      const { success, payment, purchasedItemData } = response.data;
   
       if (!success) {
         throw new Error('Failed to initialize payment. ', response);
       }
+      
+      const { success, payment, purchasedItemData } = response.data;
   
       console.log('eSewa Payment Initialization:', payment);
   
@@ -332,6 +333,7 @@ export function buyCourse(itemId, totalPrice,user){
       document.body.appendChild(form);
       form.submit();
     } catch (error) {
+      console,log("Error----------->",error)
       console.error('Error during payment initiation:', error);
     }
   }
