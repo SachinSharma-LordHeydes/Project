@@ -295,7 +295,7 @@ export function buyCourse(itemId, totalPrice,user){
       const { success, payment, purchasedItemData } = response.data;
   
       if (!success) {
-        throw new Error('Failed to initialize payment. ' + response.data.message);
+        throw new Error('Failed to initialize payment. ', response);
       }
   
       console.log('eSewa Payment Initialization:', payment);
