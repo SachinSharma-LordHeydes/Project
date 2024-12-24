@@ -62,14 +62,15 @@ exports.signUpHandler=async(req,res)=>{
     });
 
     const userResponse=await userModel.create({
-      firstName,
+       firstName,
       lastName,
       email,
-      password:encryptedPassword,
+      password: encryptedPassword,
       accountType,
-      addDetail:profileDetail._id,
-      image:`https://api.dicebear.com/9.x/initials/svg?seed=${firstName} ${lastName}`,
-      token:'',
+      addDetail: profileDetail._id,
+      image: `https://api.dicebear.com/9.x/initials/svg?seed=${firstName} ${lastName}`,
+      token: '',
+      cart: [],
     });
 
     return res.status(200).json({
