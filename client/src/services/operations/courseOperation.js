@@ -303,16 +303,16 @@ export function buyCourse(itemId, totalPrice,user){
   
       // Step 2: Create eSewa form dynamically
       const paymentForm = {
-        amount: Number(totalPrice).toFixed(2), // Ensure amount is also formatted
-        failure_url: `${apiBaseUrl}/enrolled-courses`,
+        amount: Number(totalPrice).toFixed(2),
+        failure_url: `${apiBaseUrl}/api/v1/payment/initialize-esewa`,
         product_delivery_charge: '0.00',
         product_service_charge: '0.00',
-        product_code: 'EPAYTEST', // Use your eSewa product code
+        product_code: 'EPAYTEST', 
         signature: payment.signature,
         signed_field_names: payment.signed_field_names,
-        success_url:COURSE_COMPLETE_PAYMENT_API`,
+        success_url: `${apiBaseUrl}/api/v1/payment/initialize-esewa`,
         tax_amount: '0.00',
-        total_amount: Number(totalPrice).toFixed(2), // Ensure total amount is also formatted
+        total_amount: Number(totalPrice).toFixed(2), 
         transaction_uuid: purchasedItemData._id,
       };
   
